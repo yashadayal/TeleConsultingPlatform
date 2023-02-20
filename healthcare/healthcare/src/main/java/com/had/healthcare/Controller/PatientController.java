@@ -1,4 +1,4 @@
 package com.had.healthcare.Controller;
 
-public class PatientLoginController {
+public class PatientController {
 }

@@ -6,7 +6,9 @@ import com.had.healthcare.DTOService.DoctorDTOService;
 import com.had.healthcare.Exception.ResourceNotFoundException;
 import com.had.healthcare.Repository.PatientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DoctorService implements DoctorDTOService {
 
     //Autowired because function of Service layer is using data of other layer so for object creation new keyword is
