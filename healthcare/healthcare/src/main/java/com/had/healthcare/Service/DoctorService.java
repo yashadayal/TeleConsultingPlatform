@@ -20,11 +20,13 @@ public class DoctorService implements DoctorDTOService {
     public PatientDTO getPatientById(Integer patientID) {
 
         Patient patient = this.patientRepo.findById(patientID).orElseThrow(()-> new ResourceNotFoundException("Patient","id",patientID));
+        System.out.println("in: function getPatientById");
         return this.patientToDTO(patient);
     }
 
     public PatientDTO patientToDTO(Patient patient) {
 
+        System.out.println("in function : patientToDTO");
         PatientDTO patientDTO = new PatientDTO();
         patientDTO.setPatientID(patient.getPatientID());
         patientDTO.setGender(patient.getGender());
