@@ -11,8 +11,9 @@ import lombok.Setter;
 public class DoctorDTO {
 
     Integer doctorID;
-    String name;
-    String phoneNum;
+    String first_name;
+    String last_name;
+    Integer phoneNum;
     String emailID;
     String specialization;
 

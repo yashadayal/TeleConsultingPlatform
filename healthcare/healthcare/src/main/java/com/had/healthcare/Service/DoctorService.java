@@ -1,12 +1,18 @@
 package com.had.healthcare.Service;
 
+import com.had.healthcare.Bean.Doctor;
 import com.had.healthcare.Bean.Patient;
+import com.had.healthcare.DTO.DoctorDTO;
 import com.had.healthcare.DTO.PatientDTO;
 import com.had.healthcare.DTOService.DoctorDTOService;
 import com.had.healthcare.Exception.ResourceNotFoundException;
+import com.had.healthcare.Repository.DoctorRepo;
 import com.had.healthcare.Repository.PatientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService implements DoctorDTOService {
@@ -15,6 +21,8 @@ public class DoctorService implements DoctorDTOService {
     //not required it will autowire it.
     @Autowired
     private PatientRepo patientRepo;
+    @Autowired
+    private DoctorRepo doctorRepo;
 
     @Override
     public PatientDTO getPatientById(Integer patientID) {
@@ -23,6 +31,15 @@ public class DoctorService implements DoctorDTOService {
         System.out.println("in: function getPatientById");
         return this.patientToDTO(patient);
     }
+
+    @Override
+    public List<DoctorDTO> getAllDoctors() {
+
+        List<Doctor> doctors = this.doctorRepo.findAll();
+        List<DoctorDTO> doctorDTOS = doctors.stream().map(doctor -> this.doctorToDTO(doctor)).collect(Collectors.toList());
+        return doctorDTOS;
+    }
+
 
     public PatientDTO patientToDTO(Patient patient) {
 
@@ -36,5 +53,16 @@ public class DoctorService implements DoctorDTOService {
         patientDTO.setPhoneNum(patient.getPhoneNum());
         patientDTO.setDateofBirth(patient.getDateOfBirth());
         return patientDTO;
+    }
+    public DoctorDTO doctorToDTO(Doctor doctor) {
+
+        DoctorDTO doctorDTO = new DoctorDTO();
+        doctorDTO.setDoctorID(doctor.getDoctorID());
+        doctorDTO.setSpecialization(doctor.getSpecialization());
+        doctorDTO.setFirst_name(doctor.getFirst_name());
+        doctorDTO.setLast_name(doctor.getLast_name());
+        doctorDTO.setPhoneNum(doctor.getPhoneNum());
+        doctorDTO.setEmailID(doctor.getEmailID());
+        return doctorDTO;
     }
 }
